@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<title>审核标准</title>
+<style>
+*{padding:0;margin:0;}
+body {background:#f9f9f9;font-family:"微软雅黑", "Microsoft YaHei", Helvetica,sansation, Verdana, Arial, sans-serif;}
+.clear{clear:both;height:0;overflow:hidden;font-size:0;line-height:0;}
+img {vertical-align:middle;border:0 none;}
+a {text-decoration:none;}
+.top {position:fixed;top:0;left:0;right:0;width:100%;height:2.5em;background:#FFFFFF;text-align:center;border-bottom:solid 1px #d5d5d5;}
+.top img {float:left;width:2.7em;}
+.top h1 {position:absolute;margin:auto;left:0;top:0;right:0;bottom:0;width:8em;font-size:16px;font-weight:normal;height:2.5em;line-height:2.5em;color:#505257;text-align:center;}
+.empty {height:2.5em;}
+.list {display:block;padding:12px 16px 12px 20px;background:#FFF;border-bottom:solid 1px #e3e3e3;}
+.list span {float:left;font-size:15px;color:#6c6c6c;line-height:24px;}
+.list img {float:right;width:24px;}
+.text {padding:12px 20px 20px 20px;display:none;}
+.text p {margin:5px 0;font-size:13px;color:#4d4d4d;}
+.text h2 {margin:15px 0 8px 0;font-size:13px;font-weight:normal;color:#4d4d4d;}
+.text img {margin-bottom:8px;width:100%;}
+.text .remark {color:#8e8e8e;}
+.note {padding:20px;}
+.note p {margin:5px 0;font-size:13px;color:#4d4d4d;}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".list").click(function () {
+            var textobj = $(this).next();
+            var goimg = $(this).children("img");
+            if (textobj.is(":hidden")) {
+                textobj.slideDown();
+                goimg.attr("src", "images/goend.png");
+            } else {
+                textobj.slideUp();
+                goimg.attr("src", "images/go.png");
+            };
+        });
+//        $(".list").live("click", function () {
+//        
+//        });
+
+        //	$(".list").live("click",function(){
+        //		var textobj=$(this).next();
+        //		var goimg=$(this).children("img");
+        //		if (textobj.is(":hidden")) {
+        //    		textobj.slideDown();
+        //			goimg.attr("src","../../images/goend.png");
+        //		}else{
+        //    		textobj.slideUp();
+        //			goimg.attr("src","../../images/go.png");
+        //		};
+        //    });
+    });
+</script>
+</head>
+<body>
+<div class="list">
+  <span>自拍认证审核标准</span>
+  <img src="images/go.png">
+  <div class="clear"></div>
+</div>
+<div class="text">
+<p>1.请按照模特演示动作完成拍摄</p>
+<p>2.请提供本人、真实、图像清晰、无特效的正面、全脸自拍照片</p>
+ 
+  <img src="images/sample_1.jpg">
+  <p>以下错误提交类型汇总</p>
+  <p>1.非本人照片</p>
+  <img src="images/sample_2.jpg">
+  <p>2.非真实自拍照片</p>
+  <img src="images/sample_3.jpg">
+  <p>3.照片不清晰</p>
+  <img src="images/sample_4.jpg">
+  <p>4.照片有特效</p>
+  <img src="images/sample_5.jpg">
+  <p>5.非正面全脸照</p>
+  <img src="images/sample_6.jpg">
+  <p class="remark">备注：知聊希望引导用户准确快速的完成认证工作，展示非标准图片已经经过处理，如果涉及隐私，请第一时间告知客服，我们核实后马上下架</p>
+</div>
+<div class="list">
+  <span>照片上传须知</span>
+  <img src="images/go.png">
+  <div class="clear"></div>
+</div>
+<div class="text">
+  <h2>1.男神女神上传照片须知</h2>
+  <p>必须发布本人自拍照片，非本人或色情、广告等违规照片会有审核人员直接删除；情节严重的进行封号处理；</p>
+  <h2>2.普通用户上传照片须知</h2>
+  <p>禁止发布色情，广告等违规照片，审核人员实时核查，情节严重的进行封号处理</p>
+</div>
+<div class="list">
+  <span>动态发布须知</span>
+  <img src="images/go.png">
+  <div class="clear"></div>
+</div>
+<div class="text">
+  <p>1.倡导绿色、健康、文明的动态主题发布；</p>
+  <p>2.禁止动态图片发布色情、暴力、广告等违规照片；</p>
+  <p>3.禁止动态内容包含政治敏感、色情、引诱、暴力、广告信息等文字；</p>
+</div>
+</body>
+</html>

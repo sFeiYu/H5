@@ -1,0 +1,847 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+		name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<title>任务中心</title>
+</head>
+<script>
+	var _hmt = _hmt || [];
+	(function () {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?f2ad294f198a000fb2a4fa61cdc4f64f";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+<script>
+	var clientWidth = document.documentElement.clientWidth;
+	var ch = document.documentElement.clientHeight;
+
+	var sc = clientWidth / 750;
+	var contH = ch - (85 * sc);
+	var scrollLimt = contH * 0.5;
+
+	var nod = document.createElement('style');
+	var str = '#bg{width:' + 750 * sc + 'px;height:' + 1387 * sc + 'px;}' +
+		'body{width:' + 750 * sc + 'px;}' +
+		'#titex{position: absolute;top:0px;left:0px;width:' + 750 * sc + 'px;}' +
+		'#roundBox{position: absolute;width:' + 630 * sc + 'px;height:' + 630 * sc + 'px;margin:0;top:' + 220 * sc + 'px;left:' + 65 * sc + 'px;}' +
+		'#roundimg{width:' + 630 * sc + 'px;height:' + 630 * sc + 'px;}' +
+		'#roundBt{position: absolute;top: ' + 417 * sc + 'px;left: ' + 299 * sc + 'px;width:' + 168 * sc + 'px;height:' + 205 * sc + 'px;}' +
+		'.roundP{width:100%;font-size: ' + 26 * sc + 'px; text-align: center;}' +
+		'.roundImg{position: absolute; left: ' + 75 * sc + 'px; top: ' + 71 * sc + 'px;width:' + 58 * sc + 'px; height:' + 58 * sc + 'px;}' +
+		'#R0{transform: rotate(0deg); width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px;position: absolute;top: ' + 55 * sc + 'px;left: ' + 220 * sc + 'px;}' +
+		'.nP{margin: 0;width: ' + 26 * sc + 'px;font-size: ' + 26 * sc + 'px; position: absolute; top: ' + 2 * sc + 'px;left: ' + 83 * sc + 'px;}' +
+		'#R1{transform: rotate(315deg); width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 117 * sc + 'px; left: ' + 81 * sc + 'px;}' +
+		'#R2{transform: rotate(-90deg); width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 258 * sc + 'px; left: ' + 23 * sc + 'px;}' +
+		'#R3{transform: rotate(-135deg);width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 394 * sc + 'px; left: ' + 73 * sc + 'px;}' +
+		'#R4{transform: rotate(-180deg);width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 458 * sc + 'px; left: ' + 216 * sc + 'px;}' +
+		'#R7{transform: rotate(45deg);  width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 113 * sc + 'px; left: ' + 359 * sc + 'px;}' +
+		'#R6{transform: rotate(90deg);  width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 255 * sc + 'px; left: ' + 413 * sc + 'px;}' +
+		'#R5{transform: rotate(135deg); width: ' + 200 * sc + 'px; height: ' + 112 * sc + 'px; position: absolute; margin: 0;top: ' + 399 * sc + 'px; left: ' + 353 * sc + 'px;}' +
+		'#taskBox{ position: relative;width:100%;margin-top: ' + (-530 * sc) + 'px;}' +
+		'.taskTitle{font-size: ' + 28 * sc + 'px;color: #fff;width: 100%;text-align: center;margin: 0;}' +
+		'.task{position: relative;background: #fff;width: ' + 620 * sc + 'px;height: ' + 185 * sc + 'px;border-radius: ' + 20 * sc + 'px;margin-left: ' + 64 * sc + 'px;margin-top: ' + 25 * sc + 'px;}' +
+		'.taskblock{position: relative;background: rgba(0,0,0,0);width: ' + 620 * sc + 'px;height: ' + 185 * sc + 'px;border-radius: ' + 20 * sc + 'px;margin-left: ' + 64 * sc + 'px;margin-top: ' + 25 * sc + 'px;}' +
+		'.taskIcon{position: absolute;top: ' + 45 * sc + 'px;left: ' + 21 * sc + 'px; width: ' + 102 * sc + 'px; height: ' + 102 * sc + 'px;}' +
+		'.taskP1{font-weight: bold;position: absolute;margin: 0;font-size: ' + 32 * sc + 'px;top: ' + 30 * sc + 'px;left: ' + 144 * sc + 'px;}' +
+		'.taskP2{position: absolute; margin: 0; font-size: ' + 28 * sc + 'px; color: #959494; top: ' + 74 * sc + 'px; left: ' + 141 * sc + 'px;}' +
+		'.taskP3{position: absolute; margin: 0; font-size: ' + 28 * sc + 'px; top: ' + 110 * sc + 'px; left: ' + 141 * sc + 'px; color: #ff7070;}' +
+		'.taskP3_1{font-size: ' + 44 * sc + 'px;}' +
+		//任务卡已领奖
+		'.taskbutton2{position: absolute; width: ' + 136 * sc + 'px; height: ' + 60 * sc + 'px; background: #ebebeb; border-radius: ' + 38 * sc + 'px; top: ' + 113 * sc + 'px; right: ' + 10 * sc + 'px;}' +
+		'.taskbuttonP2{pointer-events: none;font-size: ' + 24 * sc + 'px;line-height: ' + 60 * sc + 'px;margin: 0;text-align: center;color: #848484;}' +
+		//任务卡未领奖
+		'.taskbutton{position: absolute; width: ' + 136 * sc + 'px; height: ' + 60 * sc + 'px; background: #f9dc15; border-radius: ' + 38 * sc + 'px; top: ' + 113 * sc + 'px; right: ' + 10 * sc + 'px;}' +
+		'.taskbuttonP{pointer-events: none;font-size: ' + 24 * sc + 'px;line-height: ' + 60 * sc + 'px;margin: 0;text-align: center;color: #000;}' +
+		//遮罩层
+		'#maskbg{ position: fixed; width:100%;height:100%;background:rgba(0,0,0,0.3);top:0;}' +
+		'#maskbox{position: absolute; width:' + 640 * sc + 'px;height:' + 562 * sc + 'px;background:#fff;border-radius:' + 32 * sc + 'px;top: ' + 273 * sc + 'px;left: ' + 60 * sc + 'px;}' +
+		'#close{position: absolute;top: ' + 30 * sc + 'px;right: ' + 30 * sc + 'px;width: ' + 31 * sc + 'px;height: ' + 31 * sc + 'px;}' +
+		'#maskbutton{width:' + 515 * sc + 'px;height:' + 84 * sc + 'px;background:#FE6464;border-radius:' + 42 * sc + 'px;margin-left: ' + 65 * sc + 'px; margin-top: ' + 50 * sc + 'px;}' +
+		'#masktext{pointer-events: none;width: 100%;height: ' + 84 * sc + 'px;font-size: ' + 28 * sc + 'px;color: #fff;line-height: ' + 80 * sc + 'px;text-align: center;margin: 0;}' +
+		//没卡
+		'#cat{position: absolute;top: ' + (-173 * sc) + 'px;left: ' + 62 * sc + 'px;width: ' + 514 * sc + 'px;height: ' + 260 * sc + 'px;}' +
+		'#catp1{width: 100%; text-align: center; font-size: ' + 60 * sc + 'px; margin-bottom: 0; margin-top: ' + 123 * sc + 'px;}' +
+		'#catp2{width: 100%; text-align: center; height: ' + 42 * sc + 'px; font-size: ' + 30 * sc + 'px; font-weight: 600; color: rgba(99,99,99,1); line-height: ' + 42 * sc + 'px;}' +
+		'#catp3{bottom: 0px; position: absolute;margin-left: ' + 200 * sc + 'px;width: ' + 250 * sc + 'px;text-align: center; height: ' + 40 * sc + 'px; font-size: ' + 28 * sc + 'px; font-weight: 400; color: rgba(182,183,185,1); line-height: ' + 40 * sc + 'px;}' +
+		//没中奖
+		'#nogift{position: absolute;top: ' + 72 * sc + 'px;left: ' + 146 * sc + 'px;width: ' + 349 * sc + 'px;height: ' + 363 * sc + 'px;}' +
+		'#nogiftP1{width:100%;height:' + 98 * sc + 'px;font-size:' + 70 * sc + 'px;color:#f36e46;line-height:' + 98 * sc + 'px;text-align: center;margin-top: ' + 440 * sc + 'px; margin-bottom: 0;}' +
+		'#nogiftP2{width:100%;height:' + 42 * sc + 'px;font-size:' + 30 * sc + 'px;color:#22242A;line-height:' + 42 * sc + 'px;margin-top: ' + 1 * sc + 'px; text-align: center; margin-bottom: 0;}' +
+		//中奖
+		'#gift{position: absolute; width: ' + 260 * sc + 'px; height: ' + 260 * sc + 'px; top: ' + 226 * sc + 'px; left: ' + 191 * sc + 'px;}' +
+		'#giftP1{width: 100%; height: ' + 98 * sc + 'px; font-size: ' + 70 * sc + 'px; color: #f36e46; line-height: ' + 98 * sc + 'px; text-align: center; margin-top: ' + 54 * sc + 'px; margin-bottom: 0;}' +
+		'#giftP2{width: 100%; text-align: center; margin-top: ' + 360 * sc + 'px;  height: ' + 45 * sc + 'px; font-size: ' + 32 * sc + 'px; font-weight: bold; color: rgba(34,36,42,1); line-height: ' + 45 * sc + 'px; margin-bottom: 0;}' +
+		'#giftP3{width: 100%; text-align: center; height: ' + 37 * sc + 'px; font-size: ' + 26 * sc + 'px; color: rgba(102,102,102,1); line-height: ' + 37 * sc + 'px; margin-top: 0;}' +
+		'#giftP4{width: 100%; text-align: center; height: ' + 30 * sc + 'px; font-size: ' + 22 * sc + 'px; color: rgba(184,184,184,1); line-height: ' + 30 * sc + 'px; margin-top: ' + 95 * sc + 'px;}' +
+		//没钱了
+		'#nomoneyp1{width: 100%; text-align: center; font-size: ' + 60 * sc + 'px; margin-bottom: 0; margin-top: ' + 123 * sc + 'px;}' +
+		'#nomoneyp2{width: 100%; text-align: center; height: ' + 42 * sc + 'px; font-size: ' + 30 * sc + 'px; font-weight: 600; color: rgba(99,99,99,1); line-height: ' + 42 * sc + 'px;}' +
+		'#nomoneyp3{bottom: 0px; position: absolute; width: 100%; text-align: center; height: ' + 40 * sc + 'px; font-size: ' + 28 * sc + 'px; font-weight: 400; color: rgba(182,183,185,1); line-height: ' + 40 * sc + 'px;}' +
+		'#msgbox{width: ' + 750 * sc + 'px; height: ' + 54 * sc + 'px; margin: 0; position: absolute; top: ' + 140 * sc + 'px;}' +
+		'.msg{ -moz-transform: scale(' + sc + ');-webkit-transform: scale(' + sc + ');-ms-transform: scale(' + sc + ');-o-transform: scale(' + sc + ');background: rgba(0,0,0,0.3); width: ' + 400 + 'px; border-radius: ' + 60 + 'px; height: ' + 50 + 'px; margin: 0; text-align: center; line-height: ' + 50 + 'px; color: #fff; font-size: ' + 22 + 'px; position: absolute;left: ' + 750 + 'px;}' +
+		'#bottombox{position: fixed; bottom: 0; width: 100%; height: ' + 154 * sc + 'px; background: #fff;}' +
+		'#headicon{position: absolute; width: ' + 105 * sc + 'px; height: ' + 105 * sc + 'px; border-radius: ' + 90 * sc + 'px; top: ' + 26 * sc + 'px; left: ' + 38 * sc + 'px;}' +
+		'#bp1{font-weight: bold;position: absolute; font-size: ' + 34 * sc + 'px; color: #000; top: ' + 33 * sc + 'px; margin: 0; left: ' + 179 * sc + 'px;}' +
+		'#bp2{position: absolute; font-size: ' + 28 * sc + 'px; color: #dbb76d; margin: 0; top: ' + 82 * sc + 'px; left: ' + 178 * sc + 'px;}';
+	if (nod.styleSheet) { //ie下  
+		nod.styleSheet.cssText = str;
+	} else {
+		nod.innerHTML = str; //或者写成 nod.appendChild(document.createTextNode(str))  
+	}
+	document.getElementsByTagName('head')[0].appendChild(nod);
+</script>
+<script src="jquery.min.js"></script>
+<script>
+</script>
+<script src="jQueryRotate.2.2.js"></script>
+<script src="jquery.easing.min.js"></script>
+<script src="OSCheck.js"></script>
+<style>
+	html {
+		overflow-x: hidden;
+	}
+
+	body {
+		position: relative;
+		background: rgb(97, 47, 231);
+		overflow-x: hidden;
+		margin: 0 auto;
+		padding: 0;
+	}
+</style>
+<body>
+	<input type="hidden" id="memberid" value="" />
+	<input type="hidden" id="code" value="" />
+	<img id="bg" src="img/bg.jpg" />
+	<img id="titex" src="img/title.png" />
+	<div id="msgbox">
+		<p id="msg1" class="msg">
+		</p>
+		<p id="msg2" class="msg">
+		</p>
+	</div>
+	<div id="roundBox">
+		<img id="roundimg" src="img/roundBg.png" />
+		<div id='R0' value='0' ><p class='nP'>再接再厉</p></div>
+        <div id='R1' value='100' ><p class='roundP'>100聊币</p> <img id='lgold0' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/coin.png' /></div>
+        <div id='R2' value='100' ><p class='roundP'>海洋之心*5</p> <img id='lgold1' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/8.png' /></div>
+        <div id='R3' value='100' ><p class='roundP'>100聊币</p> <img id='lgold3' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/coin.png' /></div>
+        <div id='R4' value='100' ><p class='roundP'>100聊币</p> <img id='lgold4' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/coin.png' /></div>
+        <div id='R5' value='100' ><p class='roundP'>100聊币</p> <img id='lgold5' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/coin.png' /></div>
+        <div id='R6' value='100' ><p class='roundP'>100聊币</p> <img id='lgold6' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/coin.png' /></div>
+        <div id='R7' value='100' ><p class='roundP'>100聊币</p> <img id='lgold7' class='roundImg' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/GiftImages/coin.png' /></div>
+	</div>
+	<img id="roundBt" src="img/join.png" onclick="tryagain_card()" />
+	<div id="taskBox">
+		<p class="taskTitle">
+			今日任务（5）
+		</p>
+		<div class='task'><img id='ltsk0' class='taskIcon' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/TaskCenterIcons/t4.png' />
+                           <p class='taskP1'>关注微信公众号</p><p class='taskP2'>及时获取知聊最新版本</p><p class='taskP3'>+<font class='taskP3_1'>1</font>张夺宝卡
+                           </p> <div id='task_0' class='taskbutton2' ><p id='taskP_0' class='taskbuttonP2'>已领奖</p></div>
+        </div>
+         <div class='task'><img id='ltsk1' class='taskIcon' lurl='D' src='http://imgread14.kaboy.net/DefaultClipFile/TaskCenterIcons/t6.png' />
+                                       <p class='taskP1'>新人首充奖励</p><p class='taskP2'>还等啥，快快充值领红包</p><p class='taskP3'>+<font class='taskP3_1'>1</font>张夺宝卡
+                                       </p> <div id='task_1' class='taskbutton' onclick='getTask(1003)'><p id='taskP_1' class='taskbuttonP'>去完成</p></div></div>
+        <div class='taskblock'></div>
+	</div>
+	<div id="bottombox">
+		<img id="headicon" lurl="D" onerror="imageerror(this)" />
+		<p id="bp1">
+		</p>
+		<a href="AwardRecord.aspx?ID=0003587229">
+			<p id="bp2">
+			</p>
+		</a>
+	</div>
+	<div id="maskbg" onclick="closeMask()">
+	</div>
+	<div id="maskbox">
+		<img id="close" src="img/close.png" onclick="closeMask()" />
+		<div id="nomoneybox" style="display: none">
+			<p id="nomoneyp1">
+				<b>哎呀!夺宝卡不够了</b>
+			</p>
+			<p id="nomoneyp2">
+				你可以花费200聊币继续夺宝
+			</p>
+			<p id="nomoneyp3">
+				不了
+			</p>
+		</div>
+		<div id="catbox" style="display: none">
+			<img id="cat" src="img/cat.png" />
+			<p id="catp1">
+				<b>哎呀!夺宝卡不够了</b>
+			</p>
+			<p id="catp2">
+				你可以花费200聊币继续夺宝
+			</p>
+			<p id="catp3" onclick="closeMask()">
+				不了
+			</p>
+		</div>
+		<div id="nogiftbox" style="display: none">
+			<img id="nogift" src="img/nogift.png" />
+			<p id="nogiftP1">
+				<b>哎,好可惜</b>
+			</p>
+			<p id="nogiftP2">
+				差一点就能中奖了
+			</p>
+		</div>
+		<div id="giftbox" style="display: none">
+			<img id="gift" src="img/gold.png" />
+			<p id="giftP1">
+				<b>哇!运气真棒</b>
+			</p>
+			<p id="giftP2">
+				巧克力*1
+			</p>
+			<p id="giftP3">
+				价值：200聊币
+			</p>
+			<p id="giftP4">
+				奖品已入账
+			</p>
+		</div>
+		<div id="maskbutton" style="display: none" onclick="tryagain()">
+			<p id="masktext">
+				再来一次
+			</p>
+		</div>
+	</div>
+</body>
+<script>
+    //写死版本号
+	var version = 580;
+
+	//最新版本
+	var masterVersion = 521;
+	// 页面版本
+	var pageVer = 1;
+
+	var pageName = window.location.href;
+
+	pageName = pageName.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
+
+	var imgArr = $('img');
+	var appData = {};
+	var netLoad = true;
+	var imgIndex = 0;
+	var u = navigator.userAgent,
+		app = navigator.appVersion;
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	var stt;
+		var intt;
+
+	//getAppData();
+
+	function getAppData() {
+		if (version <= masterVersion) { //pagrVet 改成 appVer
+			//版本过低网络加载
+			netLoad = true;
+			createAppData();
+
+		} else {
+			appData = "def";
+			stt = setTimeout(function () {
+				if (appData == "def") {
+					createAppData();
+				}
+				else {
+					clearTimeout(stt);
+				}
+
+			}, 2000);
+			intt = setInterval(function () {
+				if (isiOS && isWK != null) {
+					jumptoApp("ReadImgData", pageName);
+				}
+				else {
+					appData = jumptoApp("ReadImgData", pageName); //读缓存
+
+					if (appData != "def") {
+
+						clearInterval(intt);
+						clearTimeout(stt);
+						netLoad = false;
+						if (appData != "" || appData != null) {
+							if (appData['ver'] == null || appData['ver'] == undefined) {
+								console.log("无缓存 开始加载网络图片");
+								createAppData();
+							} else {
+								if (Number(appData['ver']) >= pageVer) {
+
+									console.log("加载本地缓存图片");
+									setPageImg();
+								} else {
+									createAppData();
+								}
+							}
+
+						} else {
+							createAppData();
+						}
+					}
+
+				}
+			}, 100);
+		}
+
+	}
+
+	function jsImgCallBack(data) {
+		appData = JSON.parse(data);
+		if (appData != "def") {
+
+			clearInterval(intt);
+			clearTimeout(stt);
+			netLoad = false;
+			if (appData != "" || appData != null) {
+				if (appData['ver'] == null || appData['ver'] == undefined) {
+					console.log("无缓存 开始加载网络图片");
+					createAppData();
+				} else {
+					if (Number(appData['ver']) >= pageVer) {
+
+						console.log("加载本地缓存图片");
+						setPageImg();
+					} else {
+						createAppData();
+					}
+				}
+
+			} else {
+				createAppData();
+			}
+		}
+	}
+
+	function setPageImg() {
+		for (var i = 0; i < imgArr.length; i++) {
+			if (appData[imgArr[i].id] == "D") {
+				//动态图片跳过
+			} else {
+				$(imgArr[i]).attr('src', appData[imgArr[i].id]);
+
+			}
+
+		}
+	}
+
+	function createAppData() {
+		var url = $(imgArr[imgIndex]).attr('lurl');
+		var key = imgArr[imgIndex].id;
+		creataeImg(key, url);
+	}
+
+	function creataeImg(dataKey, url) {
+		var imgLink = url;
+		if (url == "D") {
+			appData[dataKey] = "D";
+			imgIndex += 1;
+			createAppData();
+		} else {
+			var tempImage = new Image();
+			tempImage.src = imgLink;
+			tempImage.crossOrigin = "*";
+			tempImage.onload = function () {
+				var base64 = getBase64Image(tempImage);
+				appData[dataKey] = base64;
+				if (netLoad) {
+					$('#' + dataKey).attr('src', base64);
+				}
+				if (imgIndex < imgArr.length) {
+					createAppData();
+				} else {
+					appData.pageName = pageName;
+					appData.ver = pageVer;
+					if (!netLoad) {
+						console.log("图片加载完成 开始写缓存");
+						setPageImg();
+						console.log("WriterImgData begin");
+						jumptoApp("WriterImgData", appData, pageName); //写缓存
+
+					}
+					setTimeout(function () {
+						appData = "";
+						console.log("appData ceache clean!");
+					}, 4000);
+				}
+				imgIndex += 1;
+			}
+		}
+
+	}
+
+	function getBase64Image(img) {
+
+		var canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0, img.width, img.height);
+		var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+		var dataURL = canvas.toDataURL("image/" + ext);
+		return dataURL;
+	}
+</script>
+<script>
+	//当前版本
+
+	var roateT = [0, 45, 90, 135, 180, 225, 270, 315];
+
+	closeMask();
+
+	function closeMask() {
+		$('#maskbg').css('display', 'none');
+		$('#maskbox').css('display', 'none');
+	}
+
+	function showMask(index) {
+		$('#maskbg').css('display', 'block');
+		$('#maskbox').css('display', 'block');
+		switch (index) {
+			case 1: //未中奖
+				$('#nogiftbox').css('display', 'block');
+				$('#giftbox').css('display', 'none');
+				$('#catbox').css('display', 'none');
+				$('#nomoneybox').css('display', 'none');
+				$('#masktext').html('再来一次');
+				$('#masktext').css('pointer-events', 'none');
+				$('#maskbutton').attr('onclick', "tryagain_card()");
+				$('#maskbox').height(803 * sc);
+				$('#maskbutton').css('display', 'block');
+				$('#maskbutton').css('margin-top', 50 * sc);
+
+				break;
+			case 2: //中奖
+				$('#nogiftbox').css('display', 'none');
+				$('#giftbox').css('display', 'block');
+				$('#catbox').css('display', 'none');
+				$('#nomoneybox').css('display', 'none');
+
+				$('#maskbox').height(743 * sc);
+				$('#maskbutton').css('display', 'none');
+				break;
+			case 3: //夺宝卡不足
+				$('#nogiftbox').css('display', 'none');
+				$('#giftbox').css('display', 'none');
+				$('#catbox').css('display', 'block');
+				$('#nomoneybox').css('display', 'none');
+
+				$('#maskbutton').css('display', 'block');
+				$('#maskbutton').attr('onclick', "tryagain_coin()");
+				$('#masktext').html('继续夺宝');
+				$('#maskbutton').css('margin-top', 100 * sc);
+				$('#maskbox').height(562 * sc);
+				break;
+			case 4: //无聊币
+				closeMask();
+				jumptoApp("RechargePopup");
+				break;
+
+		}
+	}
+
+	function setGift(url, name, price) {
+		$("#gift").attr('src', url);
+		$("#giftP2").html(name);
+		$("#giftP3").html(price);
+	}
+
+	var showMaskIndex = 1;
+	var TotalWinNum = 0;
+	var msgArr = [];
+	var msgIndex = 2;
+	var tleft = 750 * sc;
+	var tleft2 = 750 * sc;
+	var msg2start = false;
+    var msg1start = true;
+
+    //固定写死中奖数据
+
+    //固定写死底部数据
+    $("#bp1").text("剩余夺宝卡·张");
+    $("#bp2").text("哎哟不错哟，已经中过7次奖了>>");
+    $("#headicon").attr("src", "http://img81.kaboy.net/IconImageClipFile/20150319/9aecb0ae858a4c1087cb7f9c30649d2c.jpg");
+    TotalWinNum = 7;
+
+    //动态请求中奖数据
+	//$.ajax({
+	//	type: 'POST',
+	//	contentType: "application/json; charset=utf-8",
+	//	url: 'TaskRewardCenter.aspx/GetRedPackets',
+	//	data: "{'MemberID': '" + $("#memberid").val() + "' }",
+	//	dataType: "json",
+	//	success: function (data) {
+	//		msgArr = JSON.parse(data.d);
+	//		console.log(msgArr);
+	//		if (msgArr.length == 1) {
+	//			$("#msg1").html(msgArr[0].Notice);
+	//			$("#msg2").html(msgArr[0].Notice);
+	//		} else {
+	//			$("#msg1").html(msgArr[0].Notice);
+	//			$("#msg2").html(msgArr[1].Notice);
+	//		}
+	//		window.setInterval(runMsg, 30);
+	//	},
+	//	error: function (error) {
+
+	//	}
+	//});
+
+    //动态请求底部数据
+	//$.ajax({
+	//	type: 'POST',
+	//	contentType: "application/json; charset=utf-8",
+	//	url: 'TaskRewardCenter.aspx/GetSnatchCardInfo',
+	//	data: "{'MemberID': '" + $("#memberid").val() + "' }",
+	//	dataType: "json",
+	//	success: function (data) {
+	//		data = JSON.parse(data.d);
+
+	//		$("#bp1").text("剩余夺宝卡" + data.CardNumCurrent + "张");
+	//		$("#bp2").text(data.AwardCountStr + " >>");
+	//		$("#headicon").attr("src", data.IconImage);
+	//		TotalWinNum = data.TotalWinNum;
+	//	},
+	//	error: function (error) {
+
+	//	}
+	//});
+
+
+	function runMsg() {
+		if (msg1start)
+			tleft -= 3;
+		if (msg2start)
+			tleft2 -= 3;
+		$("#msg1").css('left', tleft);
+		$("#msg2").css('left', tleft2);
+		if (tleft <= 0 * sc) {
+			if (tleft <= -400 * sc) {
+				$("#msg1").html(msgArr[msgIndex].Notice);
+				tleft = 750 * sc;
+				msgIndex += 1;
+				msg1start = false;
+			}
+			msg2start = true;
+		}
+		if (tleft2 <= 0 * sc) {
+			if (tleft2 <= -400 * sc) {
+				$("#msg2").html(msgArr[msgIndex].Notice);
+				tleft2 = 750 * sc;
+				msg2start = false;
+				msgIndex += 1;
+
+			}
+			msg1start = true;
+		}
+		if (msgIndex >= msgArr.length)
+			msgIndex = 0;
+	}
+
+
+	function getTask(index) {
+		switch (index) {
+			case 1001:
+			case 2001:
+				jumptoApp("BindingTel");
+				break;
+			case 1002:
+			case 2002:
+				location.href = "WxOfficalTeach.aspx";
+				break;
+			case 1003:
+				jumptoApp("Recharge");
+				break;
+			case 1004:
+			case 1005:
+				jumptoApp("ProvideChatHall");
+				break;
+			case 2002:
+				location.href = "WxOfficalTeach.aspx?ID=<%=ENMemberID %>";
+				break;
+			case 2003:
+				location.href = "CallFriends.aspx?ID=<%=ENMemberID %>";
+				break;
+		}
+	}
+
+	function join(r) {
+		roat(r);
+	}
+	var dojoin = false;
+	function tryagain_card() {
+		if (!dojoin) {
+
+			closeMask();
+			join_card();
+			dojoin = true;
+		}
+	}
+	function tryagain_coin() {
+		if (!dojoin) {
+
+			closeMask();
+			join_coin();
+			dojoin = true;
+		}
+	}
+	function join_card() {
+		var MemberID = $("#memberid").val();
+        var Code = $("#code").val();
+        //固定写死中奖信息
+        var ldata = JSON.parse('{"ResultCode":"1","AwardGiftJson": ""}');
+        if (ldata.ResultCode == "1") {
+					if (ldata.ErrCode == "ChatBi_limit") { //聊币不足
+						//聊币不足弹框
+						showMask(4);
+						dojoin = false;
+					} else {
+                        ldata.AwardGiftJson= '{"Type":"1","GiftName":"海洋之心","ID":"1","Price":"500","GiftNum":"1","GiftImageUrl":"http: //imgread14.kaboy.net/DefaultClipFile/GiftImages/8.png"}';
+						var gift = JSON.parse(ldata.AwardGiftJson);
+						//未中奖
+						if (gift.Type == "0") {
+							//指针停留位置
+							join(getAngle(gift.ID));
+							//展示礼物
+							showMaskIndex = 1;
+						} else {
+							var name = "";
+							var price = "";
+							//中聊币
+							if (gift.Type == "1") {
+								name = gift.GiftName;
+								price = gift.Price;
+							} else {//中奖品
+								name = gift.GiftName + "*" + gift.GiftNum;
+								price = gift.Price * parseInt(gift.GiftNum);
+							}
+							setGift(gift.GiftImageUrl, name, price);
+							//指针停留位置
+							join(getAngle(gift.ID));
+							//展示礼物
+							showMaskIndex = 2;
+							//刷新中奖次数
+							TotalWinNum = TotalWinNum + 1;
+						}
+
+						//刷新用户夺宝卡
+						// $('#topP2').html(ldata.CurNum);
+						// cardNum = parseInt(ldata.CurNum);
+					}
+				} else {
+					showMask(1);
+	     }
+         //动态请求中奖信息
+		//$.ajax({
+		//	type: 'POST',
+		//	contentType: "application/json; charset=utf-8",
+		//	url: 'TaskRewardCenter.aspx/SnatchHanle_ByCard',
+		//	data: "{ 'MemberID': '" + MemberID + "','Code':'" + Code + "'}",
+		//	success: function (data) {
+		//		debugger;
+		//		var ldata = JSON.parse(data.d);
+		//		if (ldata.ResultCode == "1") {
+		//			if (ldata.ErrCode == "card_limit") { //无夺宝卡
+		//				showMask(3);
+		//				dojoin = false;
+		//			} else {
+		//				var gift = JSON.parse(ldata.AwardGiftJson);
+		//				//未中奖
+		//				if (gift.Type == "0") {
+		//					//指针停留位置
+		//					join(getAngle(gift.ID));
+		//					//展示礼物
+		//					showMaskIndex = 1;
+		//				} else {
+		//					var name = "";
+		//					var price = "";
+		//					//中聊币
+		//					if (gift.Type == "1") {
+		//						name = gift.GiftName;
+		//						price = gift.Price;
+		//					} else {//中奖品
+		//						name = gift.GiftName + "*" + gift.GiftNum;
+		//						price = gift.Price * parseInt(gift.GiftNum);
+		//					}
+		//					setGift(gift.GiftImageUrl, name, price);
+
+		//					//指针停留位置
+		//					join(getAngle(gift.ID));
+		//					//展示礼物
+		//					showMaskIndex = 2;
+		//					TotalWinNum = TotalWinNum + 1;
+		//				}
+
+		//				//刷新用户夺宝卡
+		//				$("#bp1").text("剩余夺宝卡" + ldata.CurNum + "张");
+		//				cardNum = parseInt(ldata.CurNum);
+		//			}
+		//		} else {
+		//			showMask(1);
+		//		}
+		//	},
+		//	dataType: "json"
+		//});
+	}
+
+	function join_coin() {
+		var MemberID = $("#memberid").val();
+        var Code = $("#code").val();
+        //固定写死中奖信息
+        var ldata = JSON.parse("{ResultCode:1,AwardGiftJson:{Type:1,GiftName:'海洋之心',ID:1,Price:500,GiftNum:1,GiftImageUrl:'http://imgread14.kaboy.net/DefaultClipFile/GiftImages/8.png'}}");
+        if (ldata.ResultCode == "1") {
+					if (ldata.ErrCode == "ChatBi_limit") { //聊币不足
+						//聊币不足弹框
+						showMask(4);
+						dojoin = false;
+					} else {
+
+						var gift = JSON.parse(ldata.AwardGiftJson);
+						//未中奖
+						if (gift.Type == "0") {
+							//指针停留位置
+							join(getAngle(gift.ID));
+							//展示礼物
+							showMaskIndex = 1;
+						} else {
+							var name = "";
+							var price = "";
+							//中聊币
+							if (gift.Type == "1") {
+								name = gift.GiftName;
+								price = gift.Price;
+							} else {//中奖品
+								name = gift.GiftName + "*" + gift.GiftNum;
+								price = gift.Price * parseInt(gift.GiftNum);
+							}
+							setGift(gift.GiftImageUrl, name, price);
+							//指针停留位置
+							join(getAngle(gift.ID));
+							//展示礼物
+							showMaskIndex = 2;
+							//刷新中奖次数
+							TotalWinNum = TotalWinNum + 1;
+						}
+
+						//刷新用户夺宝卡
+						// $('#topP2').html(ldata.CurNum);
+						// cardNum = parseInt(ldata.CurNum);
+					}
+				} else {
+					showMask(1);
+	     }		
+        //动态请求中奖信息
+		//$.ajax({
+		//	type: 'POST',
+		//	contentType: "application/json; charset=utf-8",
+		//	url: 'TaskRewardCenter.aspx/SnatchHanle_ByChatBi',
+		//	data: "{ 'MemberID': '" + MemberID + "','Code':'" + Code + "'}",
+		//	success: function (data) {
+		//		var ldata = JSON.parse(data.d);
+		//		if (ldata.ResultCode == "1") {
+		//			if (ldata.ErrCode == "ChatBi_limit") { //聊币不足
+		//				//聊币不足弹框
+		//				showMask(4);
+		//				dojoin = false;
+		//			} else {
+
+		//				var gift = JSON.parse(ldata.AwardGiftJson);
+		//				//未中奖
+		//				if (gift.Type == "0") {
+		//					//指针停留位置
+		//					join(getAngle(gift.ID));
+		//					//展示礼物
+		//					showMaskIndex = 1;
+		//				} else {
+		//					var name = "";
+		//					var price = "";
+		//					//中聊币
+		//					if (gift.Type == "1") {
+		//						name = gift.GiftName;
+		//						price = gift.Price;
+		//					} else {//中奖品
+		//						name = gift.GiftName + "*" + gift.GiftNum;
+		//						price = gift.Price * parseInt(gift.GiftNum);
+		//					}
+		//					setGift(gift.GiftImageUrl, name, price);
+		//					//指针停留位置
+		//					join(getAngle(gift.ID));
+		//					//展示礼物
+		//					showMaskIndex = 2;
+		//					//刷新中奖次数
+		//					TotalWinNum = TotalWinNum + 1;
+		//				}
+
+		//				//刷新用户夺宝卡
+		//				// $('#topP2').html(ldata.CurNum);
+		//				// cardNum = parseInt(ldata.CurNum);
+		//			}
+		//		} else {
+		//			showMask(1);
+		//		}
+		//	},
+		//	dataType: "json"
+		//});
+	}
+
+	function roat(num) {
+		$("#roundBox ").rotate({
+
+			angle: 0,
+
+			duration: 5000,
+
+			animateTo: num + 2880, //angle是图片上各奖项对应的角度，1440是我要让指针旋转4圈。所以最后的结束的角度就是这样子^^
+
+			callback: function () {
+				showMask(showMaskIndex);
+				//刷新中奖次数
+				if (TotalWinNum <= 10) {
+					$("#bp2").text("哎哟不错，已经中过" + TotalWinNum + "次奖了 >>");
+				} else {
+					$("#bp2").text("哇塞，你已经累计中奖" + TotalWinNum + "次啦 >>");
+				}
+				dojoin = false;
+				console.log("3");
+			}
+
+		});
+	}
+
+	var giftArr = [];
+
+	for (var i = 0; i < 8; i++) {
+		var t = $("#R" + i).attr("value");
+		giftArr.push(t);
+	}
+
+	//获取角度
+	function getAngle(ID) {
+		for (var i = 0; i < giftArr.length; i++) {
+			var tID = giftArr[i];
+			if (tID == ID)
+				return roateT[i];
+		}
+		return 0;
+	}
+	function imageerror(obj) {
+		var imageurl = $(obj).attr("src");
+		$(obj).attr("src", "img/default_head.png");
+		//防止默认图片加载失败的时候，触发onerror事件，进入死循环
+		$(obj).attr("onerror", null);
+	}
+</script>
+</html>
